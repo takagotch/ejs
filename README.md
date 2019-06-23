@@ -45,12 +45,50 @@ gulp.task('minify-html', function() {
     .pipe(gulp.dest('dist'))
 })
   
+
+const ejs = require('gulp-ejs')
+const rename = require('gulp-rename')
+
+gulp.src('./templates/*.ejs')
+  .pipe(ejs({ title: 'gulp-ejs' }))
+  .pipe(rename({ extname: '.html' }))
+  .pipe(gulp.dest('./dist'))
+
+const ejs = require('gulp-ejs')
+
+async function foobar() { /* */ }
+
+gulp.src('./templates/*.ejs')
+  .pipe(ejs({ foobar }, { async: true }))
+  .pipe(gulp.dest('./dist'))
+  
+const ejs = require('gulp-ejs')
+ejs.__EJS__.fileLoader = function () { /* */ }
+
+var ejs = require('gulp-ejs')
+var log = require('fancy-log')
+
+gulp.src('./templates/*.ejs')
+  .pipe(ejs({
+    msg: 'Hello Gulp!'
+  })).on('error', log)
+  .pipe(gulp.dest('./dist'))
+
+var ejs = require("gulp-ejs")
+
+gulp.src("./templates/*.ejs")
+  .pipe(ejs({
+    msg: "Hello Gulp!"
+  }))
+  .pipe(gulp.dest("./dist"))
 ```
 
 ```
 npm install ejs
 
 npm install gulp-minify-ejs --save-dev
+
+npm install --save-dev gulp-ejs
 ```
 
 ```
@@ -80,5 +118,6 @@ npm install gulp-minify-ejs --save-dev
   document.getElementById('output').innerHTML = html;
 </script>
 
+<%= await foobar() %>
 ```
 
