@@ -35,10 +35,22 @@ template(data);
 ejs.render(str, data, options);
 ejs.renderFile(filename, data, options, function(err, str){
 })
+
+var gulp = require('gulp'),
+  minifyejs = require('gulp-minify-ejs')
+
+gulp.task('minify-html', function() {
+  return gulp.src(['src/views/*.ejs', 'src/views/*.html'])
+    .pipe(minifyejs())
+    .pipe(gulp.dest('dist'))
+})
+  
 ```
 
 ```
 npm install ejs
+
+npm install gulp-minify-ejs --save-dev
 ```
 
 ```
